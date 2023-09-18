@@ -21,9 +21,7 @@ async function postNewsToFacebook(message) {
 router.get("/", async (req, res) => {
   try {
     // Fetch news from the database
-    const latestNews = await News.find({})
-      .sort({ createdAt: -1 }) // Sort by the creation date in descending order (latest first)
-      .limit(3); // Limit the result to three items
+    const latestNews = await News.find({}).sort({ createdAt: -1 }).limit(4);
     // Transform news into a formatted string
     const combinedNews = latestNews
       .map((element, index) => {
@@ -40,11 +38,11 @@ router.get("/", async (req, res) => {
     const facebookResponse = await postNewsToFacebook(caption);
     console.log("Automatic POST request triggered:", facebookResponse.data);
     // Delete the three latest news items from the database
-    const deletedNews = await News.deleteMany({
-      _id: { $in: latestNews.map((news) => news._id) },
-    });
+    // const deletedNews = await News.deleteMany({
+    //   _id: { $in: latestNews.map((news) => news._id) },
+    // });
 
-    console.log("Deleted news items:", deletedNews);
+    // console.log("Deleted news items:", deletedNews);
     res.redirect("/");
   } catch (error) {
     console.error("An error occurred:", error);

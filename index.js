@@ -33,7 +33,7 @@ mongoose
 
 // Routes
 app.get("/", (req, res) => {
-  res.send("Welcome to Facebook Meme API");
+  res.send("Welcome to Nepali Web Scraper and Facebook Publisher API");
 });
 
 app.use("/facebook", facebookRoute);

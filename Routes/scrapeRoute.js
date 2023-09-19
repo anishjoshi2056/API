@@ -14,13 +14,27 @@ async function scrapeWebsite(url, selector) {
       const articleTitles = [];
 
       $(selector).each((index, element) => {
-        articleTitles.push({
-          source: domain,
-          link: $(element).attr("href"),
-          news: $(element).text(),
-        });
+        if (
+          domain === "ekantipur.com" ||
+          domain === "nagariknews.nagariknetwork.com"
+        ) {
+          articleTitles.push({
+            source: domain,
+            link: `https://` + domain + $(element).attr("href"),
+            news: $(element).text(),
+          });
+        } else {
+          articleTitles.push({
+            source: domain,
+            link: $(element).attr("href"),
+            news: $(element).text(),
+          });
+        }
       });
       const newsArticle = articleTitles.slice(0, 1);
+      newsArticle.forEach((element) => {
+        console.log(element);
+      });
       newsArticle.forEach(async (newsItem) => {
         try {
           if (newsItem.news.length !== 0) {

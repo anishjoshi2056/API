@@ -48,8 +48,11 @@ async function scrapeWebsite(url, selector) {
 
 router.get("/", async (req, res) => {
   try {
-    await scrapeWebsite("https://www.onlinekhabar.com/", ".ok-container h2 a");
-    await scrapeWebsite("https://ekantipur.com/", ".normal h1 a");
+    await scrapeWebsite(
+      "https://www.onlinekhabar.com/content/news",
+      ".post-title-wrap h4 a:last-child"
+    );
+    await scrapeWebsite("https://ekantipur.com/news", ".teaser h2 a");
     await scrapeWebsite("https://www.setopati.com/", ".breaking-news-item a");
     console.log("Scraping completed successfully");
     res.redirect("/");

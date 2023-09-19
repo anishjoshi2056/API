@@ -20,7 +20,7 @@ async function scrapeWebsite(url, selector) {
           news: $(element).text(),
         });
       });
-      const newsArticle = articleTitles.slice(0, 2);
+      const newsArticle = articleTitles.slice(0, 1);
       newsArticle.forEach(async (newsItem) => {
         try {
           if (newsItem.news.length !== 0) {
@@ -54,6 +54,10 @@ router.get("/", async (req, res) => {
     );
     await scrapeWebsite("https://ekantipur.com/news", ".teaser h2 a");
     await scrapeWebsite("https://www.setopati.com/", ".breaking-news-item a");
+    await scrapeWebsite(
+      "https://nagariknews.nagariknetwork.com/",
+      ".article_template h1 a"
+    );
     console.log("Scraping completed successfully");
     res.redirect("/");
   } catch (error) {

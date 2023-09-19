@@ -21,7 +21,7 @@ async function postNewsToFacebook(message) {
 router.get("/", async (req, res) => {
   try {
     // Fetch news from the database
-    const latestNews = await News.find({}).sort({ createdAt: -1 }).limit(3);
+    const latestNews = await News.find({}).sort({ createdAt: -1 }).limit(4);
     // Transform news into a formatted string
     const combinedNews = latestNews
       .map((element, index) => {

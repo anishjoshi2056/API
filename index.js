@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const app = express();
+const Greeting = require("./Models/Greeting");
 
 // Load environment variables
 dotenv.config();
@@ -11,6 +12,7 @@ const PORT = process.env.PORT || 3000;
 // Importing Routes
 const scrapeRoute = require("./Routes/scrapeRoute");
 const facebookRoute = require("./Routes/facebookRoute");
+const greetRoute = require("./Routes/greetRoute");
 
 // Connection to Database
 
@@ -38,3 +40,4 @@ app.get("/", (req, res) => {
 
 app.use("/facebook", facebookRoute);
 app.use("/scrape", scrapeRoute);
+app.use("/greet", greetRoute);

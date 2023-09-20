@@ -27,10 +27,13 @@ function formatDate() {
     hour: "2-digit",
     minute: "2-digit",
     hour12: true,
+    timeZone: "Asia/Kathmandu", // Set the time zone to Kathmandu
   };
 
   return currentTime.toLocaleString("en-US", options);
 }
+
+
 router.get("/", async (req, res) => {
   try {
     // Fetch news from the database

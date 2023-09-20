@@ -8,6 +8,7 @@ async function postNewsToFacebook(message) {
   //const facebookUrl = `https://graph.facebook.com/${process.env.FACEBOOK_PAGE_ID}/photos`;
   const facebookUrl = `https://graph.facebook.com/${process.env.FACEBOOK_PAGE_ID}/feed`;
   const accessToken = process.env.FACEBOOK_ACCESS_TOKEN;
+  message = `Latest News Updates - ${formatDate()} \n\n${message}`;
 
   const data = {
     //caption
@@ -17,7 +18,19 @@ async function postNewsToFacebook(message) {
 
   return axios.post(facebookUrl, data);
 }
+function formatDate() {
+  const currentTime = new Date();
+  const options = {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: true,
+  };
 
+  return currentTime.toLocaleString("en-US", options);
+}
 router.get("/", async (req, res) => {
   try {
     // Fetch news from the database
@@ -25,11 +38,9 @@ router.get("/", async (req, res) => {
     // Transform news into a formatted string
     const combinedNews = latestNews
       .map((element, index) => {
-        return `${index + 1}: ${element.news} : ${element.link}\n\n`;
+        return `${index + 1}: ${element.news}\n${element.link}\n\n`;
       })
       .join("");
-
-    console.log(combinedNews);
 
     // Add a caption to the news
     const caption = `${combinedNews}`;

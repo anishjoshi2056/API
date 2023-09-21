@@ -27,7 +27,7 @@ async function scrapeWebsite(url, selector) {
           articleTitles.push({
             source: domain,
             link: $(element).attr("href"),
-            news: $(element).text(),
+            news: $(element).text().trim(),
           });
         }
       });
@@ -66,11 +66,16 @@ router.get("/", async (req, res) => {
       "https://www.onlinekhabar.com/content/news",
       ".post-title-wrap h4 a:last-child"
     );
-    await scrapeWebsite("https://ekantipur.com/news", ".teaser h2 a");
+    //await scrapeWebsite("https://ekantipur.com/news", ".teaser h2 a");
     await scrapeWebsite("https://www.setopati.com/", ".breaking-news-item a");
     await scrapeWebsite(
       "https://nagariknews.nagariknetwork.com/",
       ".article_template h1 a"
+    );
+
+    await scrapeWebsite(
+      "https://ronbpost.com",
+      ".bg-white .text-center .font-mukta a"
     );
     console.log("Scraping completed successfully");
     res.redirect("/");

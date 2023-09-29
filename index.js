@@ -16,7 +16,7 @@ const greetRoute = require("./Routes/greetRoute");
 
 // Connection to Database
 
-const MONGODB_URI = `mongodb+srv://${process.env.MONGODB_ATLAS_USERNAME}:${process.env.MONGODB_ATLAS_PASSWORD}@projects.f7s6vqh.mongodb.net/${process.env.MONGODB_ATLAS_COLLECTION}`;
+const MONGODB_URI = `${process.env.MONGODB_URI}`;
 
 mongoose.set("strictQuery", false);
 
